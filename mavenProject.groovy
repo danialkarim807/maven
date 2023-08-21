@@ -10,6 +10,6 @@ job("first-maven-project-by-DSL") {
         maven("clean package", "mavenProject.groovy")
     }
     publishers {
-        archiveArtifacts "**/*.war"
+        archiveArtifacts "**/*.jar"
     }
 }
