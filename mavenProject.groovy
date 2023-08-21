@@ -7,7 +7,7 @@ job("first-maven-project-by-DSL") {
         scm("* * * * *")
     }
     steps {
-        maven("clean package", "mavenProject.groovy")
+        maven("clean package", "pom.xml")
     }
     publishers {
         archiveArtifacts "**/*.jar"
