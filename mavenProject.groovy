@@ -6,6 +6,9 @@ job("first-maven-project-by-DSL") {
     triggers {
         scm("* * * * *")
     }
+    steps{
+        maven("localmaven")
+    }
     steps {
         maven("clean package", "maven/pom.xml")
     }
@@ -13,3 +16,58 @@ job("first-maven-project-by-DSL") {
         archiveArtifacts "**/*.jar"
     }
 }
+// --------------------//--------------------//---------------------------//---------------------------//----
+
+// job("deploy-to-github-pages") {
+//     description("Deploy web page to GitHub Pages")
+    
+//     // Add your Jenkins credentials ID for authentication
+//     authenticate("<your-credentials-id>")
+    
+//     scm {
+//         git("https://github.com/yourusername/your-webpage-repo.git", "*/main")
+//     }
+    
+//     triggers {
+//         // Add your desired trigger schedule
+//         cron("* * * * *")
+//     }
+    
+//     steps {
+//         shell("git checkout -b gh-pages") // Create or switch to the gh-pages branch
+//         shell("cp -R * /var/www/html/") // Assuming you want to deploy to a local web server directory
+//         shell("git add .")
+//         shell('git commit -m "Deploy to GitHub Pages"')
+//         shell("git push origin gh-pages")
+//     }
+    
+//     // You might want to publish a link to the deployed page as an artifact or in the build description
+//     publishers {
+//         buildDescription("<a href='https://yourusername.github.io/your-webpage-repo/'>Deployed Web Page</a>")
+//     }
+// }
+
+// def authenticate(credentialsId) {
+//     try {
+//         def creds = com.cloudbees.plugins.credentials.CredentialsProvider.lookupCredentials(
+//             com.cloudbees.plugins.credentials.common.StandardUsernameCredentials.class,
+//             Jenkins.instance,
+//             null,
+//             null
+//         )
+        
+//         def selectedCreds = creds.find { it.id == credentialsId }
+//         if (selectedCreds != null) {
+//             withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: selectedCreds.id, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+//                 sh "git config --global user.email 'jenkins@example.com'"
+//                 sh "git config --global user.name 'Jenkins'"
+//                 sh "git config --global credential.helper '!f() { sleep 1; echo username=$USERNAME; echo password=$PASSWORD; }; f'"
+//             }
+//         } else {
+//             error("Credentials not found.")
+//         }
+//     } catch (Exception e) {
+//         error("Error authenticating: ${e.message}")
+//     }
+// }
+
