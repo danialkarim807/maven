@@ -7,7 +7,7 @@ job("first-maven-project-by-DSL") {
         scm("* * * * *")
     }
     steps{
-        maven("localmaven")
+        maven Version("localmaven")
     }
     steps {
         maven("clean package", "maven/pom.xml")
