@@ -6,9 +6,6 @@ job("first-maven-project-by-DSL") {
     triggers {
         scm("* * * * *")
     }
-    steps{
-        maven Version("localmaven")
-    }
     steps {
         maven("clean package", "maven/pom.xml")
     }
