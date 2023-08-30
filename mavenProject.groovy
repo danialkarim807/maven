@@ -25,10 +25,6 @@ job("first-maven-project-by-DSL") {
     }
 
     steps {
-        script {
-            sh "git config --global user.email 'danialkarim8@gmail.com'"
-            sh "git config --global user.name 'danialkarim807'"
-        }
 
         maven("clean package", "pom.xml")
     }
